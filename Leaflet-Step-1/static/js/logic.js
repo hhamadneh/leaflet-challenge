@@ -62,12 +62,7 @@ function createMap(earthquakes) {
     accessToken: API_KEY
   });
 
-  var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "dark-v10",
-    accessToken: API_KEY
-  });
+  
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
     "Street Map": streetmap
@@ -79,26 +74,22 @@ function createMap(earthquakes) {
   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load
-  var myMap = L.map("mapid", {
+  var myMap = L.map("map", {
     center: [
       37.09, -95.71
     ],
-    zoom: 5,
+    zoom: 8,
     layers: [streetmap, earthquakes]
   });
 
 
   function getColor(d) {
-      return d < 1 ? 'rgb(255,255,255)' :
-            d < 2  ? 'rgb(255,225,225)' :
-            d < 3  ? 'rgb(255,195,195)' :
-            d < 4  ? 'rgb(255,165,165)' :
-            d < 5  ? 'rgb(255,135,135)' :
-            d < 6  ? 'rgb(255,105,105)' :
-            d < 7  ? 'rgb(255,75,75)' :
-            d < 8  ? 'rgb(255,45,45)' :
-            d < 9  ? 'rgb(255,15,15)' :
-                        'rgb(255,0,0)';
+      return d < 10 ? 'rgb(15,35,17)' :
+            d < 30  ? 'rgb(80,40,10)' :
+            d < 50  ? 'rgb(60,40,10)' :
+            d < 70  ? 'rgb(40,40,10)' :
+            d < 90  ? 'rgb(20,40,10)' :
+                        'rgb(5,40,10)';
   }
 
   // Create a legend to display information about our map
@@ -107,7 +98,7 @@ function createMap(earthquakes) {
   legend.onAdd = function (map) {
   
       var div = L.DomUtil.create('div', 'info legend'),
-      grades = [0, 1, 2, 3, 4, 5, 6, 7, 8],
+      grades = [-10, 10, 30, 50, 70, 90],
       labels = [];
 
       div.innerHTML+='Magnitude<br><hr>'

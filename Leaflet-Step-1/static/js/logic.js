@@ -84,7 +84,7 @@ function createMap(earthquakes) {
 
 
   function getColor(d) {
-      return d < 10 ? 'rgb(15,35,17)' :
+      return d < 10 ? 'rgb(100,250,50)' :
             d < 30  ? 'rgb(80,40,10)' :
             d < 50  ? 'rgb(60,40,10)' :
             d < 70  ? 'rgb(40,40,10)' :
